@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 
 # print 'aaa'
-
+# 暂时想不到怎么解决这个问题
 def quick_sort(array, left ,right):
 
     # 拆分
     # 停止
     # 保存起始点
+
     i = left
     def inplace_sort(array, left, right):
         # 原地排序
         control_point = array[left]
         while(1):
+            #
+            if len(array) ==1:
+                return   # 这个地方是有错误的
             if array[right] < control_point:
                 # 停止
                 # left 继续前行 直到 大于基准点就停止
@@ -31,25 +35,26 @@ def quick_sort(array, left ,right):
                         array[right] = array[left]
                         array[left] = temp
             else:
-                right = right + 1
+                right = right - 1
                 # right 继续前行
 
+
+
+    mid = inplace_sort(array, left, right)
     if left >= right:
         # 结束的标志位
         return
-    else:
-        mid = inplace_sort(array, left, right)
 
         # 函数功能：左排序
         # 函数合约：array
         # 函数名字：left_sort(array,left, mid-1)
-        quick_sort(array, left, mid-1)
+    quick_sort(array, left, mid-1)
         # 右排序
         # 函数名字：right_sort(array,mid+1,right)
 
-        quick_sort(array, mid+1,right)
+    quick_sort(array, mid+1,right)
     print array
 
 
 array = [10, 3, 4, 12, 5, 0]
-quick_sort(array, 0, 2)
+quick_sort(array, 0, 5)
