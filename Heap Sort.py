@@ -23,7 +23,7 @@ def max_heapify(heap, index):
             return False
 
     def has_right_leaf(index):
-        if right(index) < len(heap) - 1:
+        if right(index) <= len(heap) - 1:
             return True
         else:
             return False
@@ -63,10 +63,11 @@ def max_heapify(heap, index):
         largest = get_max_value(index) # 获取最大值，交换位置
         if largest == index:
             # mid end (这里死掉了)
-            return
+            #
+            return heap
         else:
             exchange(largest, index)
-            max_heapify(heap, largest)
+            return max_heapify(heap, largest)
     else:
         # end
         return heap
@@ -85,23 +86,21 @@ def build_max_heap(heap):
 def heap_sort(heap):
     # 将第一个元素放到最后一位
     # 再保持堆的属性
-    def exchange(start, end):
+    def exchange(heap, start, end):
         # 交换第一个位置和最后一个位置
         heap[start], heap[end] = heap[end], heap[start]
 
     heap_len_temp = len(heap)
     for i in range(len(heap) - 1, 1, -1):
         # 交换到２就结束
-        exchange(0, i)
+        exchange(heap=heap, start=0, end=i)  # heap 为什么是None
         heap_len_temp = heap_len_temp - 1
-        print heap
+        heap_temp = heap[0:heap_len_temp]
         for index in range(heap_len_temp / 2 -1, -1, -1):
             # 使之最大化
-            max_heapify(heap, index)    # 堆栈化
+            heap_temp = max_heapify(heap = heap_temp, index = index)     # 为什么返回None
+        heap = heap_temp.extend(heap[heap_len_temp:len(heap)])     # 并没有增加到heap_temp上
         print heap
-
-    print heap
-
 
 
 # heap = [16,4,10, 14, 7, 9, 3, 2, 8, 1]
