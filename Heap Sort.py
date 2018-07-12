@@ -99,7 +99,8 @@ def heap_sort(heap):
         for index in range(heap_len_temp / 2 -1, -1, -1):
             # 使之最大化
             heap_temp = max_heapify(heap = heap_temp, index = index)     # 为什么返回None
-        heap = heap_temp.extend(heap[heap_len_temp:len(heap)])     # 并没有增加到heap_temp上
+        heap_temp.extend(heap[heap_len_temp:len(heap)])     # 并没有增加到heap_temp上
+        heap = heap_temp
         print heap
 
 
