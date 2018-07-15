@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 
-
-# 函数的输入：
-# 函数的功能：保持堆的性质(选择的节点大于其所有子节点)
-# 构造堆属性
 def max_heapify(heap, index):
-    # 进行堆排序
-    # 如何进行堆排序
+
     def left(i):
         return 2 * i + 1
 
@@ -54,7 +49,6 @@ def max_heapify(heap, index):
         else:
             return index
 
-
     def exchange(largest, index):
         # 交换两者之间的数值
         heap[index], heap[largest] = heap[largest], heap[index]
@@ -84,32 +78,34 @@ def build_max_heap(heap):
 
 # 堆排序算法
 def heap_sort(heap):
-    # 将第一个元素放到最后一位
-    # 再保持堆的属性
-    def exchange(heap, start, end):
-        # 交换第一个位置和最后一个位置
+
+    heap_length = len(heap)
+
+    def exchanged_heap(heap, heap_length):
+        heap_prefix = heap[0:heap_length]
+        heap_suffix = heap[heap_length:len(heap)]
+        start = heap_length / 2 - 1
+        end = -1
+        for heap_index in range(start, end, -1):
+            heap_prefix = max_heapify(heap=heap_prefix, index=heap_index)
+        heap_prefix.extend(heap_suffix)
+        heap = heap_prefix
+        return heap
+
+    def exchange_start_end(heap, start, end):
         heap[start], heap[end] = heap[end], heap[start]
 
-    heap_len_temp = len(heap)
-    for i in range(len(heap) - 1, 1, -1):
+    for i in range(len(heap) - 1, 0, -1):
         # 交换到２就结束
-        exchange(heap=heap, start=0, end=i)  # heap 为什么是None
-        heap_len_temp = heap_len_temp - 1
-        heap_temp = heap[0:heap_len_temp]
-        for index in range(heap_len_temp / 2 -1, -1, -1):
-            # 使之最大化
-            heap_temp = max_heapify(heap = heap_temp, index = index)     # 为什么返回None
-        heap_temp.extend(heap[heap_len_temp:len(heap)])     # 并没有增加到heap_temp上
-        heap = heap_temp
-        print heap
+        exchange_start_end(heap=heap, start=0, end=i)
+        heap_length = heap_length - 1
+        heap = exchanged_heap(heap, heap_length)
+    return heap
 
 
-# heap = [16,4,10, 14, 7, 9, 3, 2, 8, 1]
-# heap = [1, 14, 10, 8, 7, 9, 3, 2, 4]
-# max_heapify(heap, 1)
+heap = [16,4,10, 14, 7, 9, 3, 2, 8, 1]
+print max_heapify(heap, 1)
 
-build_heap = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
-x = build_max_heap(build_heap)
-print x
-
-heap_sort(x)
+# build_heap = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
+# x = build_max_heap(build_heap)
+# print heap_sort(x)
