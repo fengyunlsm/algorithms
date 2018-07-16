@@ -3,9 +3,14 @@
 
 # 创建二叉查找树
 class Node():
-    def root(self, T):
-        return T[0]
+    def _init_(self, item):
+        self.item = item
+        self.left = None
+        self.right = None
 
-    def left(self):
-        # 计算机网络部门
-        return 
+
+class Tree():
+    def __init__(self):
+        pass
+
+     
