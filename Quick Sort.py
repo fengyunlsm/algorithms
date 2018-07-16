@@ -22,28 +22,21 @@ def quick_sort(array, left ,right):
                 # 一种是碰到了right ,那交换right,left的位置
                 if left == right:
                     # 停止，并交换 基准点和 array[left]
-                    temp = array[right]
-                    array[right] = array[i]
-                    array[i] = temp
+                    array[right], array[i] = array[i], array[right]
                     return left
                 else:
                     if array[left] <= control_point:
                         left = left + 1
                     else:
-                        # 交换两者之间的位置
-                        temp = array[right]
-                        array[right] = array[left]
-                        array[left] = temp
+                        array[right], array[left] = array[left], array[right]
             else:
                 right = right - 1
-                # right 继续前行
 
-
-
-    mid = inplace_sort(array, left, right)
     if left >= right:
         # 结束的标志位
         return
+    mid = inplace_sort(array, left, right)
+
 
         # 函数功能：左排序
         # 函数合约：array
