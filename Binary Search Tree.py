@@ -7,7 +7,6 @@ class Node():
         self.key = rootObj
         self.rightChild = None
         self.leftChild = None
-        self.root = None
 
     def insertLeft(self, newNode):
         if self.leftChild is None:
